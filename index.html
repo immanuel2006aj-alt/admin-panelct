@@ -695,7 +695,7 @@ async function loadDashboard() {
     container.innerHTML = `<div class="empty">
       <svg viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
       <h3>No products yet</h3><p>Add your first product to start building the Central & Stores catalog.</p>
-      <button class="btn btn-primary" onclick="openEditor('new')">Add Product</button>
+      <button class="btn btn-primary" onclick="">Add Product</button>
     </div>`;
     return;
   }
@@ -742,7 +742,7 @@ function renderProducts(items) {
     const html = `<div class="empty">
       <svg viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
       <h3>No products yet</h3><p>Add your first product to start building the Central & Stores catalog.</p>
-      <button class="btn btn-primary" onclick="openEditor('new')">Add Product</button>
+      <button class="btn btn-primary" onclick="openEditor()">Add Product</button>
     </div>`;
     tbody.innerHTML = `<tr><td colspan="7">${html}</td></tr>`;
     mobile.innerHTML = '';
@@ -967,8 +967,8 @@ $('#confirmDelete').addEventListener('click', async () => {
 /* ============================================================
    QUICK ACTIONS
    ============================================================ */
-$('#dashAddProduct').addEventListener('click', () => openEditor('new'));
-$('#addProductBtn').addEventListener('click', () => openEditor('new'));
+$('#dashAddProduct').addEventListener('click', () => openEditor());
+$('#addProductBtn').addEventListener('click', () => openEditor());
 
 /* ============================================================
    BOOT
