@@ -1,0 +1,776 @@
+/* ============================================================
+   CENTRAL & STORES — ADMIN RESPONSIVE + VISIBLE ACTION ICONS
+   ------------------------------------------------------------
+   Layered on top of admin-base.css.
+   Adds:
+     • Responsive breakpoints (320px → 4K)
+     • Sticky action columns on wide tables
+     • Table → card conversion on mobile
+     • Always-visible edit/delete/restore/purge icons
+     • Trash view styles
+     • Category grid styles
+   ============================================================ */
+
+/* ============================================================
+   1. ACTION ICONS — always visible at every screen size
+   ============================================================ */
+
+.row-actions,
+.mobile-card-actions,
+.ads-admin-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.icon-action {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  color: var(--gray-600);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
+  flex-shrink: 0;
+}
+
+.icon-action:hover {
+  background: var(--gray-100);
+  color: var(--text);
+  border-color: var(--gray-300);
+}
+
+.icon-action:active {
+  transform: scale(0.94);
+}
+
+.icon-action svg {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-action.danger {
+  color: var(--danger);
+  border-color: #f2c7c2;
+}
+
+.icon-action.danger:hover {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+}
+
+.icon-action.success {
+  color: var(--success);
+  border-color: #c9e6d4;
+}
+
+.icon-action.success:hover {
+  background: var(--success-soft);
+  border-color: var(--success);
+}
+
+.icon-action.warn {
+  color: var(--warning);
+  border-color: #f2d998;
+}
+
+.icon-action.warn:hover {
+  background: var(--warning-soft);
+  border-color: var(--warning);
+}
+
+/* Text + icon buttons */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  color: var(--gray-700);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  font-family: inherit;
+}
+
+.action-btn svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.action-btn:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+
+.action-btn.edit {
+  color: var(--gray-700);
+}
+
+.action-btn.delete {
+  color: var(--danger);
+  border-color: #f2c7c2;
+}
+
+.action-btn.delete:hover {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+}
+
+.action-btn.restore {
+  color: var(--success);
+  border-color: #c9e6d4;
+}
+
+.action-btn.restore:hover {
+  background: var(--success-soft);
+  border-color: var(--success);
+}
+
+/* ============================================================
+   2. STICKY ACTIONS COLUMN (desktop tables)
+   ============================================================ */
+@media (min-width: 1024px) {
+  .table-wrap table th:last-child,
+  .table-wrap table td:last-child {
+    position: sticky;
+    right: 0;
+    background: var(--white);
+    box-shadow: -8px 0 8px -8px rgba(0,0,0,0.08);
+    z-index: 2;
+  }
+
+  .table-wrap table thead th:last-child {
+    background: var(--gray-50);
+    z-index: 3;
+  }
+
+  .table-wrap table tbody tr:hover td:last-child {
+    background: var(--gray-50);
+  }
+}
+
+/* ============================================================
+   3. LARGE DESKTOP (1440px+)
+   ============================================================ */
+@media (min-width: 1440px) {
+  .page-content {
+    max-width: 1440px;
+  }
+}
+
+/* ============================================================
+   4. DESKTOP (1280–1439px)
+   ============================================================ */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .page-content {
+    padding: 22px 24px calc(22px + var(--nav-h));
+  }
+}
+
+/* ============================================================
+   5. LAPTOP (1024–1279px)
+   ============================================================ */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .page-content {
+    padding: 20px 20px calc(20px + var(--nav-h));
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ============================================================
+   6. TABLET (768–1023px)
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .page-content {
+    padding: 18px 16px calc(18px + var(--nav-h));
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .table-wrap {
+    display: none;
+  }
+
+  .mobile-cards {
+    display: flex;
+  }
+
+  .icon-action {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .action-btn {
+    min-height: 40px;
+    padding: 0 14px;
+  }
+
+  .page-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+/* ============================================================
+   7. MOBILE (max-width 767px)
+   ============================================================ */
+@media (max-width: 767px) {
+  .sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-area {
+    margin-left: 0;
+  }
+
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .page-content {
+    padding: 16px 14px calc(16px + var(--nav-h) + env(safe-area-inset-bottom,0));
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 14px;
+  }
+
+  .stat-value {
+    font-size: 1.375rem;
+  }
+
+  .stat-label {
+    font-size: 0.625rem;
+  }
+
+  .table-wrap {
+    display: none;
+  }
+
+  .mobile-cards {
+    display: flex;
+  }
+
+  .mobile-card {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .mobile-card-actions {
+    gap: 6px;
+  }
+
+  .icon-action {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+  }
+
+  .action-btn {
+    min-height: 40px;
+    padding: 0 12px;
+    font-size: 0.75rem;
+  }
+
+  .action-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .page-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .page-title {
+    font-size: 1.25rem;
+  }
+
+  .page-sub {
+    font-size: 0.875rem;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbar-search {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .toolbar select {
+    width: 100%;
+  }
+
+  .toolbar-right {
+    margin-left: 0;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .toolbar-right .btn {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    max-width: calc(100% - 24px);
+    padding: 20px 18px;
+    border-radius: 14px;
+  }
+
+  .modal-wide,
+  .modal-xl {
+    max-width: calc(100% - 24px);
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .order-customer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-items-table {
+    font-size: 0.75rem;
+  }
+
+  .order-items-table th,
+  .order-items-table td {
+    padding: 6px 8px;
+  }
+
+  .cat-grid-responsive {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ============================================================
+   8. SMALL PHONE (max-width 479px)
+   ============================================================ */
+@media (max-width: 479px) {
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 12px 14px;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+
+  .page-title {
+    font-size: 1.125rem;
+  }
+
+  .page-sub {
+    font-size: 0.8125rem;
+  }
+
+  .mobile-card-actions {
+    flex-wrap: wrap;
+  }
+
+  .mobile-card-actions .icon-action {
+    flex: 0 0 auto;
+  }
+
+  .mobile-card-actions .action-btn {
+    flex: 1;
+  }
+
+  .toolbar-right .btn {
+    font-size: 0.75rem;
+    padding: 0 12px;
+  }
+
+  .sidebar {
+    width: min(280px, 85vw);
+  }
+
+  .mobile-card-actions .icon-action {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ============================================================
+   9. EXTRA NARROW (max-width 359px)
+   ============================================================ */
+@media (max-width: 359px) {
+  .page-content {
+    padding: 12px 10px calc(12px + var(--nav-h));
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .mobile-card {
+    padding: 12px;
+  }
+
+  .mobile-card-top {
+    gap: 8px;
+  }
+
+  .mobile-card-thumb {
+    width: 52px;
+    height: 52px;
+  }
+
+  .mobile-card-name {
+    font-size: 0.875rem;
+  }
+
+  .mobile-card-actions {
+    gap: 4px;
+  }
+
+  .icon-action {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .icon-action svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .action-btn {
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: 0.6875rem;
+  }
+
+  .action-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* ============================================================
+   10. TRASH VIEW
+   ============================================================ */
+.trash-view {
+  padding: 20px;
+}
+
+.trash-view .card-head {
+  background: #fef6e6;
+  border-bottom-color: #f2d998;
+}
+
+.trash-view .card-title {
+  color: #b7791f;
+  font-weight: 800;
+}
+
+.trash-view table {
+  min-width: 640px;
+}
+
+.trash-view .trash-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.trash-empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--gray-500);
+}
+
+.trash-empty svg {
+  width: 48px;
+  height: 48px;
+  stroke: var(--gray-300);
+  margin: 0 auto 16px;
+}
+
+.trash-empty h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+
+.trash-empty p {
+  font-size: 0.875rem;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   11. TRASH TAB
+   ============================================================ */
+.tab[data-filter="__trash__"] {
+  color: var(--warning);
+  border-color: #f2d998;
+  background: #fef6e6;
+}
+
+.tab[data-filter="__trash__"]:hover {
+  background: #fde9bf;
+}
+
+.tab[data-filter="__trash__"].active {
+  background: var(--warning);
+  color: var(--white);
+  border-color: var(--warning);
+}
+
+/* ============================================================
+   12. CATEGORY GRID
+   ============================================================ */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .cat-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.cat-card {
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 14px;
+  background: var(--white);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.cat-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.cat-card-thumb {
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fafafa, #f0f0f0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.cat-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+}
+
+.cat-card-thumb .cat-fallback {
+  font-size: 2rem;
+  color: var(--gray-400);
+}
+
+.cat-card-name {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--black);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cat-card-name-ta {
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+  margin-top: 2px;
+}
+
+.cat-card-meta {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  margin-top: 6px;
+}
+
+.cat-card-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.cat-card-actions .action-btn {
+  flex: 1;
+}
+
+.cat-card-actions .icon-action {
+  flex: 0 0 auto;
+}
+
+/* ============================================================
+   13. ADS ADMIN TABLE (sticky Actions column)
+   ============================================================ */
+.ads-admin-desktop table {
+  min-width: 1000px;
+}
+
+.ads-admin-desktop th:last-child,
+.ads-admin-desktop td:last-child {
+  position: sticky;
+  right: 0;
+  background: var(--white);
+  box-shadow: -8px 0 8px -8px rgba(0,0,0,0.08);
+  z-index: 2;
+}
+
+.ads-admin-desktop thead th:last-child {
+  background: var(--gray-50);
+}
+
+.ads-admin-desktop tr:hover td:last-child {
+  background: var(--gray-50);
+}
+
+.ads-admin-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.ads-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  color: var(--gray-700);
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  font-family: inherit;
+}
+
+.ads-action-btn:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+
+.ads-action-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ads-action-btn--danger {
+  color: var(--danger);
+  border-color: #f2c7c2;
+}
+
+.ads-action-btn--danger:hover {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+}
+
+.ads-action-btn--icon {
+  width: 32px;
+  padding: 0;
+  justify-content: center;
+}
+
+/* ============================================================
+   14. TOASTS ON MOBILE
+   ============================================================ */
+@media (max-width: 640px) {
+  .toast-wrap {
+    bottom: calc(var(--nav-h) + 12px + env(safe-area-inset-bottom,0));
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* ============================================================
+   15. FOCUS STATES
+   ============================================================ */
+.icon-action:focus-visible,
+.action-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ============================================================
+   16. REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .icon-action,
+  .action-btn,
+  .toast {
+    transition: none !important;
+    animation: none !important;
+  }
+}
